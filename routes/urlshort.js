@@ -33,7 +33,7 @@ router.post("/addurl", async (req, res) => {
     //ValidateUrl is a function to check if it follow the regex patter or not
     if (utils.validateUrl(origUrl)) {
         try {
-            let url = await Url.findOne({ origUrl });
+            let url = await Url.findOne({ origUrl: origUrl });
             if (url) {
                 res.json(url);
             } else {
