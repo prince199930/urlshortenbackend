@@ -3,6 +3,10 @@ const router = express.Router();
 const Url = require('../models/Url')
 const utils = require('../utils/util')
 const urlShort = require('../utils/short')
+const dotenv = require('dotenv')
+dotenv.config({path:'../config.env'});
+const PORT = process.env.PORT || 8000;
+
 
 //ROUTE 1 : GET ALL NOTES using GET "api/notes/fetchallnotes"
 router.get("/fetchallurls", async (req, res) => {
@@ -19,7 +23,7 @@ router.get("/fetchallurls", async (req, res) => {
 router.post("/addurl", async (req, res) => {
     console.log("HERE", req.body);
     const { origUrl } = req.body;
-    const base = `http://localhost:8000/api/url`;
+    const base = `http://localhost:${PORT}/api/url` || `http://localhost:8000/api/url`;
 
     // UrlShortener is  a function to generate a random string from orignalUrl
     let urlValue = urlShort.urlShortener(origUrl)
